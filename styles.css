@@ -1,0 +1,502 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F6EFE3;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #4C2A17;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: #563D25;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #8B6914;
+}
+
+.container {
+  display: flex;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 60px 80px 20px;
+  gap: 80px;
+  position: relative;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 60px;
+  height: fit-content;
+  border-right: 1px solid rgba(76,42,23,0.15);
+  padding-right: 30px;
+}
+
+.profile {
+  margin-bottom: 40px;
+}
+
+.name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: #7A6B5A;
+  font-weight: 300;
+}
+
+/* Timeline Styles */
+.timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background-color: #4C2A17;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -20px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background-color: #A45A2A;
+  border-radius: 50%;
+}
+
+.timeline-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 2px;
+}
+
+.timeline-content .org {
+  font-size: 0.85rem;
+  color: #7A6B5A;
+  margin-bottom: 0;
+}
+
+.timeline-content .year {
+  font-size: 0.8rem;
+  color: #9A8B7A;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  max-width: none;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 50px;
+}
+
+.main-content > section:last-of-type {
+  margin-bottom: 0;
+}
+
+section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+/* Currently Section */
+.currently p {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #563D25;
+}
+
+.currently strong {
+  font-weight: 600;
+}
+
+/* Text links with underline but no href */
+.text-link {
+  text-decoration: underline;
+  cursor: default;
+}
+
+/* Projects Section */
+.project-category {
+  margin-bottom: 24px;
+}
+
+.project-category h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 12px;
+}
+.courses-heading {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #563D25;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin: 0 -8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.project-row:hover {
+  background-color: rgba(86, 61, 37, 0.08);
+}
+
+.project-name {
+  font-size: 0.9rem;
+  color: #563D25;
+}
+
+.project-year {
+  font-size: 0.85rem;
+  color: #9A8B7A;
+  background-color: rgba(86, 61, 37, 0.1);
+  padding: 2px 10px;
+  border-radius: 3px;
+}
+
+/* Project Tooltip - positioned on right side */
+.project-tooltip {
+  position: fixed;
+  right: 100px;
+  top: 200px;
+  width: 350px;
+  background-color: #F0EBE3;
+  border: 1px solid #D4C9B9;
+  padding: 20px 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 1000;
+}
+
+.project-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.tooltip-description {
+  font-size: 0.9rem;
+  color: #5A4A3A;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.tooltip-meta {
+  margin-bottom: 0;
+}
+
+.tooltip-date {
+  font-size: 0.85rem;
+  color: #7A6B5A;
+}
+
+/* Reading Popup - matches Kayla's library design */
+.reading-popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: #F0EBE3;
+  border: 1px solid #E0D8CC;
+  padding: 30px 40px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1001;
+}
+
+.reading-popup.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reading-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 8px;
+}
+
+.reading-quote {
+  font-size: 0.85rem;
+  color: #7A6B5A;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.reading-year {
+  margin-bottom: 20px;
+}
+
+.reading-year h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #563D25;
+  margin-bottom: 10px;
+}
+
+.reading-list p {
+  font-size: 0.9rem;
+  color: #563D25;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.reading-list .book-title {
+  color: #563D25;
+}
+
+.reading-list strong {
+  font-weight: 600;
+  color: #7A6B5A;
+}
+
+.goodreads-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #8B6914;
+  text-decoration: underline;
+}
+
+.goodreads-link:hover {
+  color: #563D25;
+}
+
+/* Overlay for reading popup */
+.reading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+}
+
+.reading-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* PiP Card for reading */
+.pip-card {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  height: 300px;
+  background-color: #F0EBE3;
+  border: 1px solid #D4C9B9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  display: none;
+  flex-direction: column;
+}
+
+.pip-card.visible {
+  display: flex;
+}
+
+.pip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: #E8E0D4;
+  border-bottom: 1px solid #D4C9B9;
+}
+
+.pip-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #563D25;
+}
+
+.pip-close {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #563D25;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.pip-close:hover {
+  color: #8B6914;
+}
+
+.pip-card iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 40px;
+}
+
+.course-item {
+  font-size: 0.85rem;
+  color: #563D25;
+  padding: 2px 0;
+  white-space: nowrap;
+}
+
+/* Coding/GitHub Chart Section */
+.coding {
+  margin-top: 40px;
+}
+
+.github-chart {
+  overflow-x: visible;
+}
+
+.github-chart img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.deploy-info {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #7A6B5A;
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #D4C9B9;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: #9A8B7A;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .timeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 0;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .timeline-item {
+    margin-bottom: 0;
+  }
+
+  .timeline-dot {
+    display: none;
+  }
+
+  .project-tooltip {
+    position: fixed;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    top: auto;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .project-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .project-year {
+    font-size: 0.75rem;
+  }
+}

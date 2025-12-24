@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>waseem ahmad</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap">
+</head>
+<body>
+  <div class="container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="profile">
+        <h1 class="name">waseem ahmad</h1>
+        <p class="tagline">software engineer &<br>undergraduate researcher</p>
+      </div>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>swe intern</h3>
+            <p class="org">pinterest</p>
+            <p class="year">summer 2026</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>swe intern</h3>
+            <p class="org">microsoft</p>
+            <p class="year">summer 2025</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>research</h3>
+            <p class="org">slade lab</p>
+            <p class="year">summer 2024</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Currently Section -->
+      <section class="currently">
+        <h2>CURRENTLY</h2>
+        <p>learning more about <a class="text-link">distributed systems</a> and <a class="text-link">high performance software</a></p>
+        <p>spending time in the gym and on the <span class="no-link">ubereats app</span></p>
+        <p>reading <a href="https://asuracomic.net/series/the-greatest-estate-developer-59bcf1dc" target="_blank">the greatest real estate developer</a></p>
+        <p>located <strong>in cambridge, ma</strong></p>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="projects">
+        <h2>PROJECTS</h2>
+        
+        <div class="project-category">
+          <div class="project-list">
+            <div class="project-row" data-project="harvardeats">
+              <span class="project-name">harvard eats (ai food tracker trained on harvard dataset)</span>
+              <span class="project-year">2025</span>
+            </div>
+            <div class="project-row" data-project="blockchain">
+              <span class="project-name">blockchain-based voting system for secure distributed elections</span>
+              <span class="project-year">2025</span>
+            </div>
+            <div class="project-row" data-project="drone">
+              <span class="project-name">open-source drone software vulnerability detection via static analysis and fuzzing</span>
+              <span class="project-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-category">
+          <h2 class="courses-heading">COURSES</h2>
+          <div class="courses-grid">
+            <span class="course-item">CS 264: Modern Storage Systems</span>
+            <span class="course-item">CS 262: Distributed Systems</span>
+            <span class="course-item">CS 254: Formal Methods for Computer Security</span>
+            <span class="course-item">CS 205: High Performance Computing</span>
+            <span class="course-item">CS 161: Operating Systems</span>
+            <span class="course-item">CS 153: Compilers</span>
+            <span class="course-item">CS 145: Networking at Scale</span>
+            <span class="course-item">CS 120: Algorithms</span>
+            <span class="course-item">CS 106: Software Engineering with AI</span>
+            <span class="course-item">CS 61: Systems Programming</span>
+            <span class="course-item">CS 51: Abstraction and Design</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Coding Activity Section -->
+      <section class="coding">
+        <h2>CODING</h2>
+        <div class="github-chart">
+          <img src="https://ghchart.rshah.org/563D25/waseemahmad1" alt="Waseem's GitHub contributions" />
+        </div>
+        <div class="deploy-info">
+          <p>
+            last updated on
+            <span id="deploy-date">loading...</span>
+            for commit
+            <a id="deploy-hash" href="#" target="_blank" rel="noopener">fetching...</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Project Tooltip -->
+    <div class="project-tooltip" id="projectTooltip">
+      <h4 class="tooltip-title">project title</h4>
+      <p class="tooltip-description">Project description goes here.</p>
+      <div class="tooltip-meta">
+        <span class="tooltip-date">📅 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
