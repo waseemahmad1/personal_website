@@ -147,7 +147,6 @@ section h2 {
 /* Text links with underline but no href */
 .text-link {
   text-decoration: underline;
-  cursor: default;
 }
 
 /* Projects Section */
