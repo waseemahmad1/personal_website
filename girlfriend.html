@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my favorite person</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #F6EFE3;
+      font-family: 'Source Sans Pro', sans-serif;
+      color: #4C2A17;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #563D25;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #8B6914;
+    }
+
+    .back-link {
+      position: fixed;
+      top: 30px;
+      left: 40px;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #563D25;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+      color: #7A6B5A;
+      margin-bottom: 60px;
+      font-style: italic;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      aspect-ratio: 3 / 4;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(76, 42, 23, 0.12);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(76, 42, 23, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item img.focus-top {
+      object-position: center top;
+    }
+
+    .gallery-item img.focus-center {
+      object-position: center 50%;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 60%,
+        rgba(86, 61, 37, 0.3)
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    /* Featured item - larger */
+    .gallery-item.featured {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: 5 / 4;
+    }
+
+    .gallery-item.tall {
+      grid-row: span 2;
+      aspect-ratio: 3 / 5;
+    }
+
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 5 / 3;
+    }
+
+    /* Sparkle decorations */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .sparkle:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 25%; right: 8%; animation-delay: 1s; }
+    .sparkle:nth-child(3) { top: 60%; left: 3%; animation-delay: 2s; }
+    .sparkle:nth-child(4) { top: 75%; right: 5%; animation-delay: 0.5s; }
+    .sparkle:nth-child(5) { top: 40%; right: 3%; animation-delay: 1.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-15px) rotate(10deg); opacity: 1; }
+    }
+
+    /* Heart animation on click */
+    .heart-burst {
+      position: fixed;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: burst 0.8s ease-out forwards;
+      z-index: 1000;
+    }
+
+    @keyframes burst {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.5) rotate(15deg); opacity: 0.8; }
+      100% { transform: scale(2) translateY(-50px) rotate(-10deg); opacity: 0; }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(246, 239, 227, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-width: 85vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(76, 42, 23, 0.25);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 2rem;
+      color: #563D25;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      color: #8B6914;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .gallery-item {
+        border-radius: 10px;
+      }
+
+      .gallery-item.featured {
+        grid-column: span 2;
+        grid-row: span 1;
+        aspect-ratio: 16/9;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .sparkle {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item.featured {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating sparkles -->
+  <span class="sparkle">✨</span>
+  <span class="sparkle">💕</span>
+  <span class="sparkle">✨</span>
+  <span class="sparkle">💕</span>
+  <span class="sparkle">✨</span>
+
+  <a href="index.html" class="back-link">← back home</a>
+
+  <div class="container">
+    <h1 class="page-title">my favorite person</h1>
+    <p class="page-subtitle">the one who makes everything better</p>
+
+    <div class="gallery">
+      <div class="gallery-item featured">
+        <img src="images/gf1.jpg" alt="photo 1">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gf2.jpg" alt="photo 2">
+      </div>
+      <div class="gallery-item tall">
+        <img src="images/gf3.jpg" alt="photo 3">
+      </div>
+      <div class="gallery-item wide">
+        <img src="images/gf4.jpg" alt="photo 4" class="focus-center">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gf5.jpg" alt="photo 5" class="focus-top">
+      </div>
+      <div class="gallery-item tall">
+        <img src="images/gf6.jpg" alt="photo 6">
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="enlarged photo">
+  </div>
+
+  <script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+
+    galleryItems.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('active');
+      }
+    });
+
+    // Heart burst on click anywhere
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.lightbox') || e.target.closest('.back-link')) return;
+      
+      const heart = document.createElement('span');
+      heart.className = 'heart-burst';
+      heart.textContent = '❤️';
+      heart.style.left = e.clientX - 16 + 'px';
+      heart.style.top = e.clientY - 16 + 'px';
+      document.body.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 800);
+    });
+  </script>
+</body>
+</html>
