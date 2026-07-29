@@ -1,4 +1,3 @@
-// Project data for tooltips
 const projectData = {
   harvardeats: {
     title: 'harvard eats',
@@ -17,15 +16,13 @@ const projectData = {
   }
 };
 
-// Initialize tooltip functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   const tooltip = document.getElementById('projectTooltip');
   const projectRows = document.querySelectorAll('.project-row');
 
   const showProject = row => {
     const project = projectData[row.dataset.project];
-
-    if (!project) return;
+    if (!project || !tooltip) return;
 
     tooltip.querySelector('.tooltip-title').textContent = project.title;
     tooltip.querySelector('.tooltip-description').textContent = project.description;
@@ -35,10 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   const hideProject = () => {
+    if (!tooltip) return;
     tooltip.classList.remove('visible');
     tooltip.setAttribute('aria-hidden', 'true');
   };
-  
+
   projectRows.forEach(row => {
     row.addEventListener('mouseenter', () => showProject(row));
     row.addEventListener('mouseleave', hideProject);
@@ -46,44 +44,4 @@ document.addEventListener('DOMContentLoaded', function() {
     row.addEventListener('blur', hideProject);
     row.addEventListener('click', () => showProject(row));
   });
-  
-  // Update footer with latest GitHub activity
-  const deployDateEl = document.getElementById('deploy-date');
-  const deployHashEl = document.getElementById('deploy-hash');
-  const githubUser = 'waseemahmad1';
-
-  if (deployDateEl && deployHashEl) {
-    fetch(`https://api.github.com/users/${githubUser}/events/public`)
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to fetch activity');
-        return response.json();
-      })
-      .then(events => {
-        const pushEvent = events.find(event => event.type === 'PushEvent');
-        if (!pushEvent) throw new Error('No recent commits found');
-
-        const commit =
-          pushEvent.payload?.commits?.[pushEvent.payload.commits.length - 1];
-        const commitSha = commit?.sha
-          ? commit.sha
-          : pushEvent.payload?.head ?? 'unknown';
-        const commitUrl = `https://github.com/${pushEvent.repo.name}/commit/${commitSha}`;
-
-        const date = new Date(pushEvent.created_at);
-        const formattedDate = new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'short'
-        }).format(date);
-
-        deployDateEl.textContent = formattedDate;
-        deployHashEl.textContent = commitSha.slice(0, 7);
-        deployHashEl.href = commitUrl;
-      })
-      .catch(err => {
-        console.error(err);
-        deployDateEl.textContent = 'unavailable';
-        deployHashEl.textContent = 'n/a';
-        deployHashEl.removeAttribute('href');
-      });
-  }
 });

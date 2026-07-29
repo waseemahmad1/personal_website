@@ -5,9 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>waseem ahmad</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Sans+Pro:wght@300;400;600&display=swap">
 </head>
 <body>
+  <div class="ambient-shape ambient-shape-one" aria-hidden="true"></div>
+  <div class="ambient-shape ambient-shape-two" aria-hidden="true"></div>
+  <div class="home-botanical" aria-hidden="true">
+    <svg viewBox="0 0 170 620">
+      <path class="home-stem" d="M151 610 C145 520 92 484 112 404 C132 329 66 296 82 219 C93 164 55 121 60 45"/>
+      <ellipse class="home-leaf" cx="126" cy="514" rx="16" ry="36" transform="rotate(-38 126 514)"/>
+      <ellipse class="home-leaf home-leaf-light" cx="87" cy="455" rx="15" ry="33" transform="rotate(38 87 455)"/>
+      <ellipse class="home-leaf" cx="117" cy="366" rx="14" ry="31" transform="rotate(-34 117 366)"/>
+      <ellipse class="home-leaf home-leaf-light" cx="68" cy="293" rx="13" ry="29" transform="rotate(36 68 293)"/>
+      <ellipse class="home-leaf" cx="91" cy="204" rx="12" ry="27" transform="rotate(-31 91 204)"/>
+      <ellipse class="home-leaf home-leaf-light" cx="49" cy="116" rx="11" ry="25" transform="rotate(33 49 116)"/>
+    </svg>
+  </div>
+
   <div class="container">
     <!-- Left Sidebar -->
     <aside class="sidebar">
@@ -103,19 +119,48 @@
         </div>
       </section>
 
-      <!-- Coding Activity Section -->
+      <!-- GitHub Activity Section -->
       <section class="coding">
-        <h2>CODING</h2>
-        <div class="github-chart">
-          <img src="https://ghchart.rshah.org/563D25/waseemahmad1" alt="Waseem's GitHub contributions" />
+        <div class="section-heading-row">
+          <div>
+            <p class="section-kicker">open source</p>
+            <h2>GITHUB</h2>
+          </div>
         </div>
-        <div class="deploy-info">
-          <p>
-            last updated on
-            <span id="deploy-date">loading...</span>
-            for commit
-            <a id="deploy-hash" href="#" target="_blank" rel="noopener">fetching...</a>
-          </p>
+        <div class="github-chart">
+          <img src="https://ghchart.rshah.org/563D25/waseemahmad1" alt="Waseem's GitHub contribution activity" loading="lazy">
+        </div>
+      </section>
+
+      <!-- Social Links Section -->
+      <section class="socials" id="socials">
+        <div class="section-heading-row">
+          <div>
+            <p class="section-kicker">find me online</p>
+            <h2>SOCIALS</h2>
+          </div>
+        </div>
+        <div class="socials-grid">
+          <a class="social-card" href="https://beliapp.co/app/waseema09" target="_blank" rel="noopener">
+            <span class="social-index">01</span>
+            <span class="social-copy"><strong>Beli</strong><small>@waseema09</small></span>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" href="https://www.linkedin.com/in/waseem-ahmad1/" target="_blank" rel="noopener">
+            <span class="social-index">02</span>
+            <span class="social-copy"><strong>LinkedIn</strong><small>waseem-ahmad1</small></span>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" href="mailto:waseemahmad@college.harvard.edu">
+            <span class="social-index">03</span>
+            <span class="social-copy"><strong>Harvard email</strong><small>waseemahmad@college.harvard.edu</small></span>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="social-card" href="https://github.com/waseemahmad1" target="_blank" rel="noopener">
+            <span class="social-index">04</span>
+            <span class="social-copy"><strong>GitHub</strong><small>@waseemahmad1</small></span>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
       </section>
     </main>
