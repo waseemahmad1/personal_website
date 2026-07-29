@@ -51,6 +51,7 @@ body::before {
 a {
   color: var(--ink);
   text-decoration-color: rgba(68, 53, 43, 0.4);
+  text-decoration-skip-ink: none;
   text-underline-offset: 3px;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
