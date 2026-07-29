@@ -280,6 +280,34 @@ section h2 {
 .currently strong { font-weight: 600; }
 .text-link { text-decoration: underline; }
 
+.girlfriend-ripple {
+  position: relative;
+  display: inline-block;
+}
+
+.girlfriend-ripple::after {
+  content: attr(data-ripple);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  text-decoration: none;
+  background: linear-gradient(
+    105deg,
+    transparent 31%,
+    rgba(230, 199, 180, 0.48) 41%,
+    rgba(255, 250, 243, 0.98) 50%,
+    rgba(214, 174, 177, 0.62) 57%,
+    transparent 68%
+  );
+  background-size: 250% 100%;
+  background-position: 155% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: girlfriend-light-ripple 3.6s linear infinite;
+}
+
 /* Projects */
 .project-category {
   margin-bottom: 24px;
@@ -508,6 +536,11 @@ section h2 {
   to { transform: rotate(1.4deg); }
 }
 
+@keyframes girlfriend-light-ripple {
+  from { background-position: 155% 0; }
+  to { background-position: -85% 0; }
+}
+
 @media (max-width: 1050px) {
   .container {
     padding: 42px 36px 60px;
@@ -602,6 +635,10 @@ section h2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .girlfriend-ripple::after {
+    content: none;
+  }
+
   *,
   *::before,
   *::after {
