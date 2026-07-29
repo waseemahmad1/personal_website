@@ -114,6 +114,7 @@ a:hover {
 .main-content {
   flex: 1;
   max-width: none;
+  min-width: 0;
 }
 
 /* Section Styles */
@@ -171,6 +172,14 @@ section h2 {
 .project-list {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+}
+
+.project-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 350px);
+  align-items: start;
+  gap: 36px;
 }
 
 .project-row {
@@ -188,6 +197,12 @@ section h2 {
   background-color: rgba(86, 61, 37, 0.08);
 }
 
+.project-row:focus-visible {
+  background-color: rgba(86, 61, 37, 0.08);
+  outline: 1px solid rgba(86, 61, 37, 0.4);
+  outline-offset: 2px;
+}
+
 .project-name {
   font-size: 0.9rem;
   color: #563D25;
@@ -201,24 +216,24 @@ section h2 {
   border-radius: 3px;
 }
 
-/* Project Tooltip - positioned on right side */
+/* Project preview lives in its own column, so it never covers a project row. */
 .project-tooltip {
-  position: fixed;
-  right: 100px;
-  top: 200px;
-  width: 350px;
+  position: relative;
+  width: 100%;
+  min-height: 190px;
   background-color: #F0EBE3;
   border: 1px solid #D4C9B9;
   padding: 20px 24px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s ease, visibility 0.15s ease;
-  z-index: 1000;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
 }
 
 .project-tooltip.visible {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
 }
 
 .tooltip-title {
@@ -474,13 +489,22 @@ section h2 {
     display: none;
   }
 
+  .project-showcase {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
   .project-tooltip {
-    position: fixed;
-    right: 20px;
-    left: 20px;
-    width: auto;
-    top: auto;
-    bottom: 20px;
+    min-height: 0;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 24px;
+  }
+
+  .course-item {
+    white-space: normal;
   }
 }
 
@@ -497,5 +521,9 @@ section h2 {
 
   .project-year {
     font-size: 0.75rem;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
   }
 }

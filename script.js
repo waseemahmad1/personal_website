@@ -21,26 +21,30 @@ const projectData = {
 document.addEventListener('DOMContentLoaded', function() {
   const tooltip = document.getElementById('projectTooltip');
   const projectRows = document.querySelectorAll('.project-row');
+
+  const showProject = row => {
+    const project = projectData[row.dataset.project];
+
+    if (!project) return;
+
+    tooltip.querySelector('.tooltip-title').textContent = project.title;
+    tooltip.querySelector('.tooltip-description').textContent = project.description;
+    tooltip.querySelector('.tooltip-date').textContent = project.year;
+    tooltip.classList.add('visible');
+    tooltip.setAttribute('aria-hidden', 'false');
+  };
+
+  const hideProject = () => {
+    tooltip.classList.remove('visible');
+    tooltip.setAttribute('aria-hidden', 'true');
+  };
   
   projectRows.forEach(row => {
-    row.addEventListener('mouseenter', function(e) {
-      const projectId = this.dataset.project;
-      const project = projectData[projectId];
-      
-      if (project) {
-        // Update tooltip content
-        tooltip.querySelector('.tooltip-title').textContent = project.title;
-        tooltip.querySelector('.tooltip-description').textContent = project.description;
-        tooltip.querySelector('.tooltip-date').textContent = '📅 ' + project.year;
-        
-        // Show tooltip
-        tooltip.classList.add('visible');
-      }
-    });
-    
-    row.addEventListener('mouseleave', function() {
-      tooltip.classList.remove('visible');
-    });
+    row.addEventListener('mouseenter', () => showProject(row));
+    row.addEventListener('mouseleave', hideProject);
+    row.addEventListener('focus', () => showProject(row));
+    row.addEventListener('blur', hideProject);
+    row.addEventListener('click', () => showProject(row));
   });
   
   // Update footer with latest GitHub activity
