@@ -541,6 +541,20 @@ section h2 {
   to { background-position: -85% 0; }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body {
+    cursor: url("assets/cursor-default.svg") 4 3, auto;
+  }
+
+  a,
+  button,
+  [role="button"],
+  .project-row {
+    cursor: url("assets/cursor-interactive.svg") 4 3, pointer;
+  }
+}
+
 @media (max-width: 1050px) {
   .container {
     padding: 42px 36px 60px;
