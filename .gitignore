@@ -2,3 +2,8 @@
 images/*
 !images/web/
 !images/web/*.jpg
+
+# Private memories deployment: never commit photos, secrets, or local Worker state.
+# The private Worker, its answers, and its photo assets are deployed
+# directly to Cloudflare and must never enter this public repository.
+private-worker/
