@@ -1,2 +1,4 @@
 .DS_Store
-images/
+images/*
+!images/web/
+!images/web/*.jpg
